@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChatGPT Executor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .header {
+            background-color: #1f1f1f;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav ul li {
+            margin-right: 20px;
+        }
+
+        .nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .auth-container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-signup,
+        .btn-login {
+            background-color: #ff5722;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-signup:hover,
+        .btn-login:hover {
+            background-color: #e64a19;
+        }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 50px;
+            height: 25px;
+        }
+
+        .toggle-switch input {
+            display: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            border-radius: 50%;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #ff5722;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 50px;
+            background: url('slack.png') no-repeat center center;
+            background-size: cover;
+            transition: background 0.3s ease;
+            color: #fff;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: #fff;
+            margin-left: 20px;
+        }
+
+        .hero-content h1 {
+            font-size: 3em;
+        }
+
+        .hero-content p {
+            font-size: 1.5em;
+        }
+
+        .btn-download {
+            background-color: #ff5722;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background-color: #e64a19;
+        }
+
+        .about-section {
+            padding: 50px;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .about-section h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .about-section p {
+            font-size: 1.2em;
+            line-height: 1.5;
+        }
+
+        .additional-content {
+            margin-top: 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+        <div class="auth-container">
+            <div class="auth-buttons">
+                <button class="btn-signup">Sign Up</button>
+                <button class="btn-login">Login</button>
+            </div>
+            <div class="toggle-container">
+                <span>Dark Mode</span>
+                <label class="toggle-switch">
+                    <input type="checkbox" id="darkModeToggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Welcome to ChatGPT Executor</h1>
+            <p>Your ultimate tool for automated scripting and more.</p>
+            <a href="#about" class="btn-download">Download</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <h2>About ChatGPT Executor</h2>
+        <p>ChatGPT Executor is an advanced tool designed to streamline scripting processes...</p>
+        <div class="additional-content">
+            <p>More content appears as you scroll...</p>
+        </div>
+    </section>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+        const aboutSection = document.querySelector('.about-section');
+        const hero = document.querySelector('.hero');
+
+        darkModeToggle.addEventListener('change', () => {
+            if (darkModeToggle.checked) {
+                body.style.backgroundColor = '#121212';
+                body.style.color = '#e0e0e0';
+                aboutSection.style.backgroundColor = '#1f1f1f';
+                aboutSection.style.color = '#e0e0e0';
+                hero.style.background = 'url(slack.png) no-repeat center center, linear-gradient(to right, #000000, #333333)';
+            } else {
+                body.style.backgroundColor = '#f5f5f5';
+                body.style.color = '#333';
+                aboutSection.style.backgroundColor = '#f5f5f5';
+                aboutSection.style.color = '#333';
+                hero.style.background = 'url(slack.png) no-repeat center center, linear-gradient(to right, #0d47a1, #1a237e)';
+            }
+        });
+    </script>
+</body>
+
+</html>
